@@ -1,0 +1,49 @@
+#header {
+    width: 100%;
+    z-index: 1;
+  }
+  
+  .menu {
+    height: 50px;
+    line-height: 50px;
+    font-size: 14px;
+    padding-left: 100px;
+    padding-right: 100px;
+    background-color: white;
+  }
+  
+  /* 네비게이션 로고 */
+  .menu a {
+    float: left;
+  }
+  
+  .menu a img {
+    height: 35px;
+    vertical-align: middle;
+  }
+  
+  .menu::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+  
+  /* 네비게이션 메뉴 */
+  .menu li a {
+    text-decoration: none;
+    color: black;
+    margin-left: 40px;
+  }
+  
+  .menu li a:hover {
+    color: #B586FF;
+  }
+  
+  /* 네비게이션 로그인 */
+  .menu .login_message a {
+    float: right;
+    text-decoration: none;
+    color: black;
+    background-color: rgba(224, 175, 255, 0.2);
+    padding: 0px 60px;
+  }

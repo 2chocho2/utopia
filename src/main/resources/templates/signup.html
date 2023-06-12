@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Utopia 《Sign up》</title>
+<link rel="icon" href="/img/logo.png" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+<link rel="stylesheet" th:href="@{/css/login.css}" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+<div class="signupbg">
+   <div class="container">
+   <div class="signupbox">
+   <img src="/img/signup_logo.png" >
+     
+      <form action="/memberInsert.do" method="POST">
+      
+         <div class="form-group">
+            <label for="MemberEmail"></label> 
+            <input type="text" class="form-control" id="memberEmail" name="memberEmail" placeholder="이메일을 입력해주세요"/>
+         </div>
+         
+         <div class="mt-2 form-group">
+            <label for="memberPw"></label> 
+            <input type="password" class="form-control" id="memberPw" name="memberPw" placeholder="비밀번호를 입력해주세요"/>
+         </div>
+         
+         <div class="mt-3 form-group">
+            <label for="memberPw"></label> 
+            <input type="password" class="form-control" id="memberPwCheck" name="memberPwCheck" placeholder="비밀번호를 다시 한 번 확인해주세요" onblur="passConfirm()" /> 
+            <span id ="confirmMsg" style= "font-size:12px";></span>
+         </div>
+         
+         <div class="form-group1">
+            <label for="MemberName"></label> 
+            <input type="text" class="form-control" id="memberName" name="memberName" placeholder="닉네임을 정해주세요"/>
+         </div>
+         
+         <div class="mt-4">
+            <input type="submit" value="가입완료" class="btn btn-primary" />
+         </div>
+         
+      </form>
+      
+      <script type="text/javascript">
+      	function passConfirm() {
+      		var password = document.getElementById('memberPw');
+      		var passwordConfirm = document.getElementById('memberPwCheck');
+      		var confirmMsg  = document.getElementById('confirmMsg');
+      		var correctColor = "green";
+      		var wrongColor ="#ff0000";
+      		
+      		if (password.value === passwordConfirm.value) {//password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
+    			confirmMsg.style.color = correctColor;/* span 태그의 ID(confirmMsg) 사용  */
+    			confirmMsg.innerHTML ="비밀번호 일치";/* innerHTML : HTML 내부에 추가적인 내용을 넣을 때 사용하는 것. */
+    		} else {
+    			confirmMsg.style.color = wrongColor;
+    			passwordConfirm.focus();
+    			confirmMsg.innerHTML ="비밀번호 불일치";
+    		}
+      	}
+      
+      </script>
+      </div>
+   </div>
+</div>
+</body>
+</html>

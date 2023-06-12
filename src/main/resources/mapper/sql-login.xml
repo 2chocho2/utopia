@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="utopia.mapper.LoginMapper">
+	
+	<!-- 로그인에 대한 요청 -->
+	<select id="login" parameterType="utopia.dto.LoginDto" resultType="utopia.dto.MemberDto">
+		SELECT member_email, member_pw, member_name
+		  FROM t_member
+		 WHERE member_email = #{memberEmail} and member_pw = #{memberPw}
+	</select>
+
+	<!-- 회원 가입에 대한 요청 -->
+ 	<insert id="memberInsert" parameterType="utopia.dto.MemberDto" useGeneratedKeys="true" keyProperty="memberId">
+		INSERT INTO t_member (member_email, member_pw, member_name)
+		     VALUES (#{memberEmail}, #{memberPw}, #{memberName});
+	</insert> 
+	
+	<!-- 메인 화면에 베스트 셀러 출력 -->
+	<select id="selectPerfumeBest" resultType="utopia.dto.PerfumeDto">
+        SELECT p.perfume_id, perfume_name, perfume_price,thumbs_ct, brand_name, perfume_img as perfumeImage, category_name
+          FROM t_perfume p, t_brand b, t_perfume_brand pb, t_perfume_category pc, t_category c
+         WHERE p.perfume_id = pb.perfume_id
+           AND b.brand_id = pb.brand_id
+           AND p.perfume_id = pc.perfume_id
+           AND pc.category_id = c.category_id 
+      ORDER BY thumbs_ct desc
+         LIMIT 3
+	</select>
+	
+</mapper>

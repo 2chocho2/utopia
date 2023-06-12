@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <title>Utpoia</title>
+    <link rel="icon" href="/img/logo.png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+<body>  
+<!-- 네비게이션 -->
+  <div id="header">
+    <nav class="menu" >
+      <a id="logo" href="/main.do"><img src="/img/logoW.png" alt="이상향"></a>
+      
+      <ul>
+      <li><a href="/main.do" style="color: rgba(224, 175, 255)">홈화면</a></li>
+        <li><a href="/utopia/perfume">제품목록</a></li>
+        <li><a href="/utopia/reviewList.do">대화의창</a></li>
+      </ul>
+      
+	<div class="login_message">
+      
+		<div th:if="${#strings.isEmpty(session.member)}" style="text-align:right;">
+			<a href="/login.do" class="btn"><i class="fas fa-user"></i>로그인 및 회원가입</a>
+		</div>
+		<!-- 로그인 성공 시 로그인한 사용자 이름과 로그아웃 버튼을 출력 -->     
+		<div th:unless="${#strings.isEmpty(session.member)}" style="text-align:right;">
+			<a href="/logout.do" class="btn"><i class="far fa-user"></i>로그아웃</a><p><b>[[${session.member.memberName}]]</b>님 환영합니다~!! **✲ﾟ*(❁´▽`❁)*✲ﾟ** </p>
+      	</div>
+    </nav>
+  </div>
+
+  <!-- 메인 -->
+  <div class="main" >
+    <div class="logotxt" style=" font-size: 20px;">
+      <img src="/img/logo_text.png">
+    </div>
+    
+    <div class="text">
+      <h1># 당신의 이상향은 무엇인가요?</h1>
+      <p>‘나의 향수는 나의 일부가 되고 아무도 그것을 모방할 수 없다’
+        향기는 타인과의 우아한 차별점이자 분위기의 얼굴입니다
+        나에게 맞는 향수를 찾아가는 것은 나의 정체성을 찾아가는 과정이기도 합니다.
+        세계 수만 개의 향수 중 당신의 향수를 찾는 것은 운명과도 같습니다
+        그렇기에 이상향은 오늘도 향기와 사람을 잇는 매개체가 되어 새로운 향수들을 끊임없이 탐구하는 일을 멈추지 않습니다.
+        당신의 일부가 되는 최적의 향수를 찾는 일,
+        그것이 이상향이 존재하는 이유입니다.
+        </p> 
+    </div>
+       
+    <div class="block">
+      <div class="quick">
+        <a href="/utopia/perfume"><img src="/img/quickmenu1.png"></a>
+      </div>
+      <div class="quick">
+        <a href="/utopia/perfume?brandId=1"><img src="/img/quickmenu2.png"></a>
+      </div>
+      <div class="quick">
+        <a href="/utopia/perfume?brandId=2"><img src="/img/quickmenu3.png"></a>
+      </div>
+      <div class="quick">
+        <a href="/utopia/perfume?brandId=3"><img src="/img/quickmenu4.png"></a>
+      </div>
+      <div class="quick" >
+        <a href="/utopia/perfume?brandId=4"><img src="/img/quickmenu5.png" alt=""></a>
+      </div>
+      <div class="quick">
+        <a href="/utopia/perfume?brandId=5"><img src="/img/quickmenu6.png"></a>
+      </div>
+    </div>
+  </div>
+
+<div class="something">
+	<div class="somethingbgw">
+		<div class="bestseller">
+		<h2>BESTSELLER</h2>
+        <div class="card">
+		<ul class="product"  th:if="${#lists.size(bestList)}>0 " th:block th:each="perfume :${bestList}" >
+	         <img src="" th:attrappend="src=${perfume.perfumeImage}">  </img> <br>
+	         <li>
+	         	[[${perfume.brandName}]]<br> 
+				<p1>[[${perfume.perfumeName}]]</p1><br>
+				[[${perfume.perfumePrice}]]<br>     
+	         </li>  
+         </ul>
+		   </div>
+		</div>
+		
+		<div class="curation">
+		<h2>CURATION</h2>
+		<p>브랜드 공식 홈페이지로 이동하여 제품을 확인 해 볼 수 있습니다.</p>
+			<li>
+				<a href="https://www.chanel.com/kr/fragrance/">
+				<img src="/img/curation1.png"></a>
+				<h1>샤넬</h1>
+				<p>샤넬 향수는 특별한 향과 함께 있는 그대로의 모습을 드러내는 작품입니다. 특별한 시리즈를 통해 샤넬 향수에 관련된 노하우와 전문 기술, 창의성을 끊임없이 추구하는 샤넬의 여정을 확인해 보세요.</p>
+			</li>
+			<li>
+				<a href="https://www.jomalone.co.kr/colognes">
+				<img src="/img/curation2.png"></a>
+				<h1>조말론</h1>
+				<p>조 말론 런던의 심플하면서도 우아한 코롱은 엄선된 원료를 바탕으로 서로 다른 코롱과 함께 페어링 할 수 있도록 디자인되었습니다. 나만을 위한, 가장 잘 어울리는 향을 완성해 보세요.</p>
+			</li>
+			<li>
+				<a href="https://www.byredo.com/eu_en/perfume/">
+				<img src="/img/curation3.png"></a>
+				<h1>바이레도</h1>
+				<p>바이레도의 럭셔리 향수 카테고리 제품은 바이레도의 시그니처 마그네틱 캡이 특징인 미니멀한 병에 담긴 신선한 꽃, 따뜻한 머스크, 이국적인 향신료, 우디 노트를 감정과 기억을 포착하는 독특한 향 블렌드로 변환합니다.</p>
+			</li>
+		</div>
+		
+		<div class="text">
+			<h2># 오늘의 당신은 꿈꾸던 모습의 당신인가요?</h2>
+			<p1>향기는 시간과 장소의 구속에서 벗어나 기억을 되새기게 하고<br>
+				수많은 사연과 이야기에 귀 기울이게 해준다.<br>
+				향수 안에 나의 내면이 있다.<br><br>
+	
+				-’향기 탐색’ 중에서-</p1>
+			<img src="/img/mainunder_txt.png" alt="이상향">
+		</div>
+	</div>
+</div>
+  
+  <!-- 푸터 -->
+  <div class="footer">
+    <div class="copyright">
+      <p>Copyright &copy; 이상향</p>
+    </div>
+  </div>         
+</body>
+</html>

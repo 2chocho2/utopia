@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+   <meta charset="UTF-8">
+   <title>Utopia 《WriteReview》</title>
+      <link rel="icon" href="/img/logo.png">
+   <link rel="stylesheet" th:href="@{/css/table.css}">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+ 
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+</head>
+<body>
+   
+  <!-- 네비게이션 -->
+  <div id="header">
+    <nav class="menu" >
+      <a id="logo" href="/main.do"><img src="/img/logo.png" alt="이상향"></a>
+      
+      <ul>
+      <li><a href="/main.do">홈화면</a></li>
+        <li><a href="/utopia/perfume">제품목록</a></li>
+        <li><a href="/utopia/reviewList.do" style="color: rgba(224, 175, 255)">대화의창</a></li>
+      </ul>
+
+      
+	<div class="login_message">
+     
+		<!-- 로그인 성공 시 로그인한 사용자 이름과 로그아웃 버튼을 출력 -->     
+		<div th:unless="${#strings.isEmpty(session.member)}" style="text-align:right;">
+			<a href="/logout.do" class="btn"><i class="far fa-user"></i>로그아웃</a><p><b>[[${session.member.memberName}]]</b>님 환영합니다~!! **✲ﾟ*(❁´▽`❁)*✲ﾟ** </p>
+      	</div>
+   </div>
+   </nav>
+ </div>
+
+  <div class="backimg">
+   <div class="container">
+      <h2>리뷰 작성</h2>
+   
+   <form action="/utopia/insertReview.do" method="post" enctype="multipart/form-data">
+      
+         <table class="write_review">
+            <colgroup>
+               <col width="10%" />
+               <col width="50%" />
+               <col width="10%" />
+               <col width="30%" />
+            </colgroup>
+            
+            <tbody>
+               <tr>
+                  <th scope="col">제목</th> 
+                  <td><input class="input" type="text" id="reviewTitle" name="reviewTitle" /></td>
+                  <th scope="col">작성자</th>
+                  <td><input class="input" type="text" id="memberName" name="memberName" th:value=${session.member.memberName} readonly></td>
+                  
+               </tr>
+               
+               <tr>
+                  <th scope="col">사용 향수</th>
+                  <td><input class="input" type="text" id="usePerfume" name="usePerfume" /></td>
+                  <th scope="col">브랜드</th>
+                  <td>
+                  <select id="brand" name="perfumeBrand">
+                      <option value="아쿠아디파르마">아쿠아디파르마</option>
+                      <option value="바이레도">바이레도</option>
+                      <option value="샤넬">샤넬</option>
+                      <option value="딥디크">딥디크</option>
+                      <option value="조말론">조말론</option>
+                  </select>
+                  </td>
+               </tr>
+               
+               <tr>
+                  <th scope="col">상세한 <br> 후기를 <br>알려 주세요</th>
+                  <td colspan="3"><textarea class="textarea" id="reviewContents" name="reviewContents"></textarea></td>
+               </tr>
+               
+               <tr>
+                  <th scope="col">이미지</th>
+                  <td colspan="3">
+                     <div class="filebox">
+                         <input class="upload-name" value="이미지" placeholder="첨부파일">
+                         <label for="reviewImg">첨부하기</label> 
+                         <input type="file" id="reviewImg" name="file">
+                     </div>
+                  </td>
+               </tr>
+            </tbody>
+         
+         </table>
+         
+         <input class="btn" type="submit" value="제출" />
+      </form>
+      
+      
+      <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+      
+      <script>
+      $("#reviewImg").on('change',function(){
+           var fileName = $("#reviewImg").val();
+           $(".upload-name").val(fileName);
+         });
+      </script>
+   </div>
+</div>
+</body>
+</html>

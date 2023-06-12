@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="utopia.mapper.PerfumeMapper">
+
+   <!-- 검색 조건과 일치하는 게시물의 개수 조회 -->
+   <select id="selectPerfumeListCount" resultType="int">
+     SELECT count(*)
+       FROM t_perfume
+   </select> 
+   
+   <!-- 검색 조건과 일치하는 제품 중 offset부터 30개를 조회 -->
+   <select id="selectPerfumeList" resultType="utopia.dto.PerfumeDto">
+       SELECT p.perfume_id, perfume_name, perfume_price,thumbs_ct, brand_name, perfume_img as perfumeImage, category_name
+         FROM t_perfume p, t_brand b, t_perfume_brand pb, t_perfume_category pc, t_category c
+        WHERE p.perfume_id = pb.perfume_id
+          AND b.brand_id = pb.brand_id
+          AND p.perfume_id = pc.perfume_id
+          AND pc.category_id = c.category_id 
+     ORDER BY thumbs_ct desc
+        LIMIT #{offset}, 30
+   </select>
+
+	<!-- 브랜드 선택 -->
+	<select id="selectBrandList" resultType="utopia.dto.PerfumeDto">
+	   SELECT brand_id, brand_name
+	     FROM t_brand b   
+	</select>
+   
+   <!-- 사용자가 선택한 브랜드의 제품 목록 출력 -->
+   <select id="selectBrandPerfumeList" parameterType="int" resultType="utopia.dto.PerfumeDto">
+      SELECT p.perfume_id, perfume_name, perfume_price, thumbs_ct, brand_name, perfume_img as perfumeImage, category_name
+        FROM t_perfume p, t_brand b, t_perfume_brand pb, t_perfume_category pc, t_category c
+       WHERE p.perfume_id = pb.perfume_id
+         AND p.perfume_id = pc.perfume_id
+         AND pb.perfume_id = pc.perfume_id
+         AND b.brand_id = #{brandId}
+         AND pb.brand_id = #{brandId}
+         AND c.category_id = pc.category_id
+    ORDER BY thumbs_ct desc
+   </select>
+   
+ 	<!-- 좋아요 수 업데이트-->
+	<update id="updateThumbsCount" parameterType="int">
+	   UPDATE t_perfume 
+	      SET thumbs_ct = thumbs_ct + 1
+	    WHERE perfume_id = #{perfumeId}
+	</update>
+   
+</mapper>

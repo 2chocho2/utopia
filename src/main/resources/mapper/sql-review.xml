@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="utopia.mapper.ReviewMapper">
+
+	<!-- 리뷰 목록 조회-review 테이블 -->
+	<select id="selectReviewList" resultType="utopia.dto.ReviewDto">
+	   SELECT review_id, review_title, review_contents, review_img, use_perfume, perfume_brand, review_dt, member_name
+	     FROM t_review
+	    WHERE deleted_yn = 'N'
+	 ORDER BY review_id desc
+	    LIMIT 4;
+	</select>
+	
+	<!-- 리뷰에 사용된 브랜드 조회 -->
+   <select id="openReviewBrand" resultType="utopia.dto.BrandDto">
+   	   SELECT brand_name
+    	 FROM t_brand
+    	WHERE brand_id = #{brandId}
+   </select>
+   
+   <!-- 리뷰 작성자 조회 -->
+  	<select id="openReviewMember" parameterType="int" resultType="utopia.dto.MemberDto">
+  	 SELECT member_name
+  	   FROM t_member
+  	  WHERE member_id = #{memberId}
+  	</select>   
+   
+	<!-- 검색 조건과 일치하는 게시물 개수를 조회 -->
+	<select id="selectReviewListCount" resultType="int">
+	   SELECT count(*)
+	     FROM t_review
+	    WHERE deleted_yn = 'N'
+	</select>
+      
+	<!-- 검색 조건과 일치하는 게시판 중 offset에서부터 8개만 조회해서 반환 -->
+	<select id="selectReviewListPage" parameterType="int" resultType="utopia.dto.ReviewDto">
+		SELECT review_id, review_title, review_img, use_perfume, member_name, perfume_brand
+		  FROM t_review
+		 WHERE deleted_yn = 'N'
+	  ORDER BY review_id desc
+		 LIMIT #{offset}, 8
+	</select>
+  
+   <!-- 리뷰 작성 -->
+   <insert id="insertReview" parameterType="utopia.dto.ReviewDto">
+      INSERT INTO t_review (review_title, review_contents, review_dt, review_img, use_perfume, perfume_brand,  member_name )
+           VALUES (#{reviewTitle}, #{reviewContents}, now(), #{reviewImg}, #{usePerfume}, #{perfumeBrand} , #{memberName})
+   </insert>
+   
+   <!-- (사진 로드 시) 리뷰 아이디에 맞춰 리뷰 정보 조회 -->
+   <select id="selectReviewByReviewId" parameterType="int" resultType="utopia.dto.ReviewDto">
+		SELECT review_id, review_title, review_contents, review_img, use_perfume, perfume_brand
+		  FROM t_review
+		 WHERE review_id = #{reviewId}
+   </select>
+   
+   <!-- 리뷰 상세 조회 -->
+   <select id="selectReviewDetail" parameterType="int" resultType="utopia.dto.ReviewDto">
+		SELECT review_id, review_title, review_contents, review_dt, review_img, use_perfume, perfume_brand , member_name
+		  FROM t_review
+		 WHERE deleted_yn = 'N' 
+		   AND review_id = #{reviewId}
+    </select>
+     
+	<!-- 리뷰 수정 -->
+	<update id="updateReview" parameterType="utopia.dto.ReviewDto">
+	   UPDATE t_review
+	      SET review_title = #{reviewTitle}, 
+	          review_contents = #{reviewContents},
+	          use_perfume = #{usePerfume},
+	          review_dt = now(),
+	          review_id = review_id
+	    WHERE review_id = #{reviewId}        
+	</update>
+
+	<!-- 리뷰 삭제 -->
+	<delete id="deleteReview" parameterType="int">
+	   UPDATE t_review
+	      SET deleted_yn = 'Y', 
+	          review_dt = now(),
+	          review_id = review_id
+	    WHERE review_id = #{reviewId}        
+	</delete>
+</mapper>  

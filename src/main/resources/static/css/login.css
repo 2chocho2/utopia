@@ -1,0 +1,162 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.form-group {
+    font-family: 'NanumSquareNeo-Variable';
+}
+
+.loginbg {
+	background: url(/img/login_bg.png) no-repeat center;
+	background-size: cover;
+	margin: 0px;
+}
+
+.loginbg .container {
+	background-color: rgba(255, 255, 255, 0.3);
+	height:630px;
+	width:350px;
+	margin: auto;
+	padding:180px;
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2), -3px -3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.loginbox {
+	margin: auto;
+	display: block;
+	position: relative;
+	top: 5%;
+}
+
+/*로고*/
+.loginbox img {
+	width: 300px;
+	display: block; 
+	margin: 0px auto;
+}
+
+/* 이메일, 패스워드 */
+.loginbox input#memberEmail,
+.loginbox input#memberPw {
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
+	border:none;
+	padding:20px 20px;
+	border-radius:15px;
+	background:white; 
+	margin-top: 20px;
+	margin-bottom: 20px; 
+	font-family: 'NanumSquareNeo-Variable';
+	color: gray; 
+	font-size: 12px; 
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2), -3px -3px 5px rgba(0, 0, 0, 0.1);
+	outline-color: #FFAEC1;
+}
+ 
+ /*로그인*/
+.loginbox .mt-3 {
+	text-align: center;   
+  }
+  
+.loginbox .mt-3 input {
+	color: white;
+	border:none;
+	width: 100%;
+	padding:18px 60px;
+	border-radius:50px;
+	background-image: linear-gradient(to bottom right,  #8000BB, #FA60E7);   
+	font-family: 'NanumSquareNeo-Variable';
+	font-size: 16px;
+	font-weight: bold;
+	margin-top: 20px;
+	letter-spacing: 6px;
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2), -3px -3px 5px rgba(0, 0, 0, 0.1);  
+}
+   
+/*회원가입*/
+.loginbox .mt-4 {
+	text-align: right;
+ }
+  
+.loginbox .mt-4 a{
+	display: inline-block;
+	text-decoration: none;
+	color: white;
+	margin-top: 20px;
+	margin-right: 10px;
+	font-size: 14px;
+  }
+
+/* 회원가입페이지 */
+.signupbg {
+	background: url(/img/signup_bg.png) no-repeat center;
+	background-size: cover;
+	margin: 0px;
+}
+
+.container {
+	background-color: rgba(255, 255, 255, 0.3);
+	height:630px;
+	width:350px;
+	margin: auto;
+	padding:180px;
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2), -3px -3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.signupbox {
+   margin: auto;
+   display: block;
+   position: relative;
+}
+
+.signupbox input#memberEmail,
+.signupbox input#memberPw,
+.signupbox input#memberPwCheck,
+.signupbox input#memberName {
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
+	border:none;
+	padding:20px 20px;
+	border-radius:15px;
+	background:white;    
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-family: 'NanumSquareNeo-Variable';
+	color: gray; 
+	font-size: 12px;    
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2), -3px -3px 5px rgba(0, 0, 0, 0.1);
+	outline-color: #FFAEC1;
+}
+  
+.signupbox .mt-4 {
+	text-align: center;   
+  }
+  
+.signupbox .mt-4 input {
+	color: white;
+	border:none;
+	width: 100%;
+	padding:18px 60px;
+	border-radius:50px;
+	background-image: linear-gradient(to bottom right,  #8000BB, #C7E4FF);
+	font-family: 'NanumSquareNeo-Variable';
+	font-size: 16px;
+	font-weight: bold;
+	margin-top: 20px;
+	letter-spacing: 6px; 
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2), -3px -3px 5px rgba(0, 0, 0, 0.1);  
+}
+
+/*로고*/
+.signupbox img {
+   width: 300px;
+   display: block; 
+   margin: 0px auto;
+}
